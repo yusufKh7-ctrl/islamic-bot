@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Environments
+.env
+.venv
+
+
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Ruff stuff:
+.ruff_cache/
+
+__pycache__/
+*.pyc
