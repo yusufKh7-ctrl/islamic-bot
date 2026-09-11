@@ -43,12 +43,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = ReplyKeyboardMarkup(
         keyboard,
         resize_keyboard=True,
-        is_persistent=True
+        is_persistent=False
         )
 
     welcome_text = (
-        "السلام عليكم ورحمة الله وبركاته 🌿\n"
-        "أهلاً بك في *بوت سراج المؤمن* 💫\n\n"
+        "السلام عليكم ورحمة الله وبركاته \n"
+        "أهلاً بك في *بوت غِـرَاس* 🌱\n\n"
         "اختر ما تشاء من الأزرار أدناه لتذكِّر قلبك بالله 🤍"
     )
 
@@ -75,11 +75,11 @@ SYNC_HANDLER = {
     "🌙 أذكار المساء": evening_adhkar,
     "💭 ذكر من الأذكار": general_adhkar,
     "🤲 دعاء من القرآن": get_random_dua,
+    "📜 حديث شريف": get_random_hadith,
 }
 
 ASYNC_HANDLER = {
     "📖 آية من القرآن": get_random_ayah,
-    "📜 حديث شريف": get_random_hadith,
     "✍️ حديث قُدسي": get_random_hadith_qudsi,
 }
 
