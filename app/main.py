@@ -34,9 +34,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+@app.get("/")
+async def root():
+    return {"status": "online", "message": "Ghiras Bot API is running.🌱"}
+
+
 @app.get("/health")
 @app.head("/health")
 async def health_check():
     return {"status": "ok"}
+
 
 app.include_router(webhook_router)
