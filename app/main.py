@@ -29,8 +29,6 @@ async def lifespan(app: FastAPI):
     yield
 
     logger.info("Stoping Telegram Bot...")
-    if BASE_URL:
-        await ptb_app.bot.delete_webhook()
     await ptb_app.stop()
     await ptb_app.shutdown()
 
