@@ -104,17 +104,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await message.reply_text("عذراً، تعذر الاتصال الآن، حاول مرة أخرى من فضلك 🙏")
 
 # Start the bot
-if __name__ == "__main__":
-    print("🚀 Bot is running...")
 
-    app = (
+ptb_app = (
         ApplicationBuilder()
         .token(BOT_TOKEN)
         .post_init(post_init)
         .request(HTTPXRequest(connect_timeout=20, read_timeout=20))
         .build()
     )
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+ptb_app.add_handler(CommandHandler("start", start))
+ptb_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+if __name__ == "__main__":
+    print("🤖 Bot is running...")
+    ptb_app.run_polling(allowed_updates=Update.ALL_TYPES)
