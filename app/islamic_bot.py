@@ -34,10 +34,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_display = username if username else user.full_name
 
     keyboard = [
-        ["📖 آية من القرآن", "🤲 دعاء من القرآن"],
-        ["📜 حديث شريف", "✍️ حديث قُدسي"],
+        ["🤲 دعاء من القرآن", "📖 آية من القرآن"],
+        ["✍️ حديث قُدسي", "📜 حديث شريف"],
         ["💭 ذكر من الأذكار"],
-        ["🌅 أذكار الصباح", "🌙 أذكار المساء"],
+        ["🌙 أذكار المساء", "🌅 أذكار الصباح"],
     ]
 
     reply_markup = ReplyKeyboardMarkup(
@@ -45,18 +45,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         resize_keyboard=True,
         is_persistent=False
         )
-
+    
+    channel_url = "https://t.me/qabas_ys7"
     welcome_text = (
-        "السلام عليكم ورحمة الله وبركاته \n"
-        "أهلاً بك في *بوت غِـرَاس* 🌱\n\n"
-        "اختر ما تشاء من الأزرار أدناه لتذكِّر قلبك بالله 🤍"
+        "السلام عليكم ورحمة الله وبركاته\n"
+        "أهلاً بك في <b>بوت غِـرَاس</b> 🌱\n\n"
+        "اختر ما تشاء من الأزرار أدناه لتذكِّر قلبك بالله 🤍\n\n"
+        f'📢 <b>تابعنا على:</b> <a href="{channel_url}">قناة قَبَسْ</a>'
     )
 
     if update.message is None:
         return
     
     await update.message.reply_text(
-        welcome_text, reply_markup=reply_markup, parse_mode="Markdown"
+        welcome_text, reply_markup=reply_markup, parse_mode="HTML", disable_web_page_preview=True
     )
     logger.info(f"User: {user_display} has started the bot.")
 
