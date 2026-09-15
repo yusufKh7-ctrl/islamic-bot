@@ -5,14 +5,19 @@ from telegram.ext import (
     CommandHandler,
     ContextTypes,
     MessageHandler,
-    filters
+    filters,
+    TypeHandler
 )
 from app.core.logger import setup_logger
 from app.data.ayah import get_random_ayah
 from app.data.hadith import get_random_hadith, get_random_hadith_qudsi
 from app.data.adhkar import morning_adhkar, evening_adhkar, general_adhkar
 from app.data.quran_dua import get_random_dua
-
+from app.utils.message_split import send_split_message
+from app.db.init_db import init_models
+from app.handlers.tracking import track_user
+from app.handlers.stats import stats
+from app.handlers.broadcast import broadcast_command
 
 import os
 from dotenv import load_dotenv
@@ -100,7 +105,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await message.reply_text("⚠️ خيار غير معروف، اختر من الأزرار المتاحة 👇")
             return
         
-        await message.reply_text(text, parse_mode="Markdown")
+        await send_split_message(message, text, parse_mode="HTML")
     except Exception as e:
         logger.error(f"Error handling message '{user_text}': {type(e).__name__}: {e}", exc_info=True)
         await message.reply_text("عذراً، تعذر الاتصال الآن، حاول مرة أخرى من فضلك 🙏")
@@ -116,6 +121,10 @@ ptb_app = (
     )
 ptb_app.add_handler(CommandHandler("start", start))
 ptb_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+ptb_app.add_handler(TypeHandler(Update, track_user), group=-1)
+ptb_app.add_handler(CommandHandler("stats", stats))
+ptb_app.add_handler(CommandHandler("broadcast", broadcast_command))
+
 
 if __name__ == "__main__":
     print("🤖 Bot is running...")

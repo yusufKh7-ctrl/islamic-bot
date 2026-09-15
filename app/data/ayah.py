@@ -25,6 +25,6 @@ async def get_random_ayah():
     tafsir_text = tafsir_data["text"]
     ayah_number_in_surah = ayah_data["numberInSurah"]
     return (f"﴿ {ayah_text} ﴾\n\n📖"
-            f"*{surah_name}* - الآية ({ayah_number_in_surah})\n\n"
-            f"*تفسير الميسّر:*\n{tafsir_text}"
+            f"<b>{surah_name}</b> - الآية ({ayah_number_in_surah})\n\n"
+            f"<b>تفسير الميسّر:</b>\n{tafsir_text}"
         )

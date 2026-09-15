@@ -16,5 +16,5 @@ def get_random_dua():
     surah = dua["surah"]
     ayah_number = str(dua["ayah"])
 
-    format_text = f"﴿ {ayah} ﴾ \n\n- {surah} ({ayah_number})"
+    format_text = f"﴿ {ayah} ﴾ \n\n- <b>{surah}</b> ({ayah_number})"
     return format_text
