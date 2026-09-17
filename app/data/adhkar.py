@@ -13,7 +13,7 @@ def format_adhkar_list(duas: list, title: str) -> str:
     for i, dua in enumerate(duas, start=1):
         arabic = dua["arabic"]
         repeat = dua["repeat"]
-        repeat_text = f" ({repeat}x)" if repeat > 1 else ""
+        repeat_text = f" <b>«{repeat}»</b>" if repeat > 1 else ""
         parts.append(f"\n\n{i}. ﴿ {arabic} ﴾{repeat_text}")
     return "\n\n".join(parts)
 
@@ -37,7 +37,7 @@ def general_adhkar():
     arabic = zikr["arabic"]
     repeat = zikr["repeat"]
     
-    repeat_text = f"\n ({repeat}x)" if repeat > 1 else ""
+    repeat_text = f"\n\n مرات التكرار: <b>«{repeat}»</b>" if repeat > 1 else ""
     desc = zikr["description"]
     desc_text = f"\n\n- {desc}" if desc else ""
 

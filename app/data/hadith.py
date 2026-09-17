@@ -48,7 +48,7 @@ def get_random_hadith():
         parts = [f"﴿ {arabic_text} ﴾"]
         if chapter_name:
             parts.append(f"📖 {chapter_name}")
-        parts.append(f'{book_data["book_name"]} - رقم الحديث: {hadith["idInBook"]}')
+        parts.append(f'{book_data["book_name"]} - رقم الحديث: «{hadith["idInBook"]}»')
         return "\n\n".join(parts)
 
     except Exception as e:
@@ -61,9 +61,10 @@ with open(QUDSI_HADITHS, encoding="utf-8") as f:
 
 book_name = _qudsi_hadith["metadata"]["arabic"]["title"]
 hadiths_list = _qudsi_hadith["hadiths"]
+
 async def get_random_hadith_qudsi():
     hadith = random.choice(hadiths_list)
     arabic_text = hadith["arabic"]
     hadith_num = hadith["idInBook"]
 
-    return f'﴿ {arabic_text} ﴾ \n\n - {book_name} - رقم الحديث: {hadith_num}'
+    return f'﴿ {arabic_text} ﴾ \n\n - <b>{book_name}</b> - رقم الحديث: «{hadith_num}»'

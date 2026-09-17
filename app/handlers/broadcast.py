@@ -31,7 +31,7 @@ async def broadcast_to_all(bot: Bot, text: str, parse_mode: str = "HTML") -> tup
             failed += 1
             logger.warning(f"BadRequest sending to {uid}: {e}")
 
-        await asyncio.sleep(0.05)  # احترام حدود تليجرام (~30 رسالة/ثانية)
+        await asyncio.sleep(0.05)  # حدود تليجرام (~30 رسالة/ثانية)
 
     return success, failed
 

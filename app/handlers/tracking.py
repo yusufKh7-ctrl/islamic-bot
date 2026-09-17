@@ -25,7 +25,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     first_name=user.first_name,
                 ))
             await session.commit()
-        logger.info(f"Tracked user {user.id} successfully.")
+        logger.debug(f"Tracked user {user.id} successfully.")
 
     except Exception as e:
         logger.error(f"Failed to track user {user.id}: {type(e).__name__}: {e}", exc_info=True)

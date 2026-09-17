@@ -4,6 +4,13 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.api.webhook import router as webhook_router
 from app.islamic_bot import ptb_app, logger
+import logging
+
+class HealthCheckFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool | logging.LogRecord:
+        return "/health" not in record.getMessage()
+
+logging.getLogger("uvicorn.access").addFilter(HealthCheckFilter())
 
 load_dotenv()
 

@@ -31,12 +31,15 @@ if not BOT_TOKEN:
 
 logger = setup_logger()
 
-# ======= /start =======
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def user_info(update: Update):
     user = update.effective_user
     assert user is not None
     username = user.username
-    user_display = username if username else user.full_name
+    return username if username else user.full_name
+
+# ======= /start =======
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_display = user_info(update)
 
     keyboard = [
         ["🤲 دعاء من القرآن", "📖 آية من القرآن"],
@@ -96,6 +99,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     user_text = message.text
+    user_display = user_info(update)
+
     try:
         if user_text in SYNC_HANDLER:
             text = SYNC_HANDLER[user_text]()
@@ -106,6 +111,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         
         await send_split_message(message, text, parse_mode="HTML")
+        logger.info(f"'{user_display}' requested: {user_text}")
     except Exception as e:
         logger.error(f"Error handling message '{user_text}': {type(e).__name__}: {e}", exc_info=True)
         await message.reply_text("عذراً، تعذر الاتصال الآن، حاول مرة أخرى من فضلك 🙏")
