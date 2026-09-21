@@ -43,11 +43,17 @@ async def broadcast_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if user.id != ADMIN_ID:
         return
 
-    if not context.args:
-        await update.message.reply_text("الاستخدام: /broadcast نص الرسالة هنا")
+    
+    full_text = update.message.text
+    if full_text is None:
         return
+    
+    parts = full_text.split(maxsplit=1)
 
-    text = " ".join(context.args)
+    if len(parts) > 2 or len(parts) < 2:
+        await update.message.reply_text("الاستخدام: /broadcast نص الرسالة هنا")
+        return 
+    text = parts[1]
     await update.message.reply_text("⏳ جاري الإرسال...")
 
     success, failed = await broadcast_to_all(context.bot, text)
